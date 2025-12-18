@@ -246,7 +246,7 @@ func (m Model) buildProfilePane(width, height int) string {
 
 func (m Model) buildStatusBar() string {
 	left := fmt.Sprintf(" %s v%s │ [%s]", config.AppName, config.Version, m.CurrentProfile)
-	shortcuts := "'Help' | Ctrl+N:new │ Ctrl+H/L:switch │ Ctrl+E:profiles │ Ctrl+D:exit"
+	shortcuts := "'help' | Ctrl+N:new │ Ctrl+H/L:switch │ Ctrl+E:profiles │ Ctrl+D:exit"
 
 	gap := m.Width - len(left) - len(shortcuts)
 	if gap < 0 {
