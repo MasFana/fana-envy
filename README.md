@@ -1,6 +1,6 @@
 # Fana-Envy
 
-Fana-Envy is a powerful, persistent terminal environment manager built with Go. It allows you to manage environment variables TUI.
+Fana-Envy is a powerful, persistent terminal environment manager built with Go. It allows you to manage environment variables with TUI.
 
 ![fana-envy UI](image.png)
 
