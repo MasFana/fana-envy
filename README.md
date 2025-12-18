@@ -12,7 +12,7 @@ Fana-Envy is a powerful, persistent terminal environment manager built with Go. 
 
 ## Features
 
-- **Environments**: Switch between sets of environment variables instantly (renamed from Profiles).
+- **Environments**: Switch between sets of environment variables instantly.
 - **Multiple Terminals**: Manage multiple terminal instances in tabs/panes with dynamic naming (e.g., changes to `python` when running python).
 - **Interactive Experience**:
   - Full support for interactive commands (e.g., Python `input()`, REPLs).
