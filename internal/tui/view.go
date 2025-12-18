@@ -53,13 +53,13 @@ func (m Model) overlayInput(underlying string) string {
 
 	switch m.InputPurpose {
 	case "new":
-		title = " Create Profile "
-		prompt = "Enter profile name:"
+		title = " Create Environment "
+		prompt = "Enter environment name:"
 	case "delete":
 		title = " Confirm Delete "
 		prompt = "Are you sure? (y/n)"
 	case "rename":
-		title = " Rename Profile "
+		title = " Rename Environment "
 		prompt = "Enter new name:"
 	case "confirm_save":
 		title = " Unsaved Changes "
@@ -120,7 +120,7 @@ func (m Model) buildSidebar(height int) string {
 		b.WriteString(marker + style.Render(name) + status + "\n")
 	}
 
-	profTitle := "  Profiles"
+	profTitle := "  Environment"
 	if m.Mode == ModeProfiles {
 		profTitle = styles.Title.Render(profTitle)
 	} else {
@@ -246,7 +246,7 @@ func (m Model) buildProfilePane(width, height int) string {
 
 func (m Model) buildStatusBar() string {
 	left := fmt.Sprintf(" %s v%s │ [%s]", config.AppName, config.Version, m.CurrentProfile)
-	shortcuts := "'help' | Ctrl+N:new │ Ctrl+H/L:switch │ Ctrl+E:profiles │ Ctrl+D:exit"
+	shortcuts := "'help' | Ctrl+N:new │ Ctrl+H/L:switch | Ctrl+W:close │ Ctrl+E:env │ Ctrl+D:exit"
 
 	gap := m.Width - len(left) - len(shortcuts)
 	if gap < 0 {

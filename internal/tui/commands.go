@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"runtime"
 	"sort"
 	"strings"
 	"time"
@@ -52,6 +53,24 @@ func (m Model) ExecuteCommand(input string) (tea.Model, tea.Cmd) {
 			t.AddOutput(styles.Error.Render(fmt.Sprintf("cd: %v", err)))
 		} else {
 			m.UpdateGitBranch()
+		}
+		return m, nil
+
+	case "open":
+		envDir := filepath.Join(m.ConfigPath, config.EnvFolderName)
+		var cmd *exec.Cmd
+		switch runtime.GOOS {
+		case "windows":
+			cmd = exec.Command("explorer", envDir)
+		case "darwin":
+			cmd = exec.Command("open", envDir)
+		default:
+			cmd = exec.Command("xdg-open", envDir)
+		}
+		if err := cmd.Start(); err != nil {
+			t.AddOutput(styles.Error.Render("Error opening folder: " + err.Error()))
+		} else {
+			t.AddOutput(styles.Success.Render("✓ Opened envs folder"))
 		}
 		return m, nil
 
@@ -148,6 +167,8 @@ func (m Model) ExecuteCommand(input string) (tea.Model, tea.Cmd) {
 		return m, nil
 	}
 
+	t.OriginalName = t.Name
+	t.Name = cmd
 	return m, m.RunExternalCmd(t.ID, cmd, args)
 }
 
@@ -156,13 +177,19 @@ func (m *Model) RunExternalCmd(termID int, name string, args []string) tea.Cmd {
 		for _, t := range m.Terminals {
 			if t.ID == termID {
 				c := exec.Command(name, args...)
-				c.Env = m.BuildEnv()
+				env := m.BuildEnv()
+				env = append(env, "PYTHONUNBUFFERED=1")
+				env = append(env, "FORCE_COLOR=1")
+				env = append(env, "CLICOLOR_FORCE=1")
+				c.Env = env
 
 				stdout, _ := c.StdoutPipe()
 				stderr, _ := c.StderrPipe()
+				stdin, _ := c.StdinPipe()
 
 				t.Mu.Lock()
 				t.Cmd = c
+				t.Stdin = stdin
 				t.Running = true
 				t.Mu.Unlock()
 
@@ -216,7 +243,7 @@ func (m Model) GenerateCompletions(input string) ([]string, string) {
 
 	if !strings.Contains(input, " ") {
 		start := input
-		cmds := []string{"help", "env", "set", "unset", "switch", "new", "cd", "exit", "quit", "clear", "cls"}
+		cmds := []string{"help", "env", "set", "unset", "switch", "new", "open", "cd", "exit", "quit", "clear", "cls"}
 		for _, cmd := range cmds {
 			if strings.HasPrefix(cmd, start) {
 				add(cmd)

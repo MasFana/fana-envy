@@ -18,6 +18,19 @@ func (m Model) handleTerminalKey(msg tea.KeyMsg) (tea.Model, tea.Cmd) {
 
 	switch msg.Type {
 	case tea.KeyEnter:
+		// Check if running
+		if t.Running {
+			if t.Stdin != nil {
+				// Pass to stdin
+				inputLine := t.Input.Value() + "\n"
+				t.Stdin.Write([]byte(inputLine))
+				prompt := m.buildPromptText()
+				t.AddOutput(prompt + t.Input.Value()) // Echo
+				t.Input.SetValue("")
+			}
+			return m, nil
+		}
+
 		input := strings.TrimSpace(t.Input.Value())
 		if input == "" {
 			return m, nil
@@ -35,8 +48,10 @@ func (m Model) handleTerminalKey(msg tea.KeyMsg) (tea.Model, tea.Cmd) {
 
 		t.AddOutput(prompt + input)
 
-		// Add to history
-		m.History = append(m.History, input)
+		// Add to history (if not same as last)
+		if len(m.History) == 0 || m.History[len(m.History)-1] != input {
+			m.History = append(m.History, input)
+		}
 		m.HistoryIdx = len(m.History)
 		utils.SaveHistory(m.ConfigPath, m.History)
 

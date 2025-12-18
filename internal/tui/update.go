@@ -45,6 +45,10 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				if msg.Err != nil {
 					t.AddOutput(styles.Error.Render(fmt.Sprintf("Exit: %v", msg.Err)))
 				}
+				if t.OriginalName != "" {
+					t.Name = t.OriginalName
+					t.OriginalName = ""
+				}
 				break
 			}
 		}

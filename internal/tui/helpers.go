@@ -204,7 +204,7 @@ func (m *Model) GetHelp() string {
   unset K       Remove variable
   switch NAME   Change profile
   new NAME      Create profile
-  cd [DIR]      Change directory
+  open          Open envs folder
   clear         Clear terminal
   exit          Quit
 

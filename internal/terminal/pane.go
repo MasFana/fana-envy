@@ -2,6 +2,7 @@ package terminal
 
 import (
 	"fmt"
+	"io"
 	"os/exec"
 	"strings"
 	"sync"
@@ -13,14 +14,16 @@ import (
 
 // TerminalPane represents a single terminal session
 type TerminalPane struct {
-	ID       int
-	Name     string
-	Output   []string
-	Input    textinput.Model
-	Viewport viewport.Model
-	Cmd      *exec.Cmd
-	Running  bool
-	Mu       sync.Mutex
+	ID           int
+	Name         string
+	Output       []string
+	Input        textinput.Model
+	Viewport     viewport.Model
+	Cmd          *exec.Cmd
+	Stdin        io.WriteCloser
+	Running      bool
+	Mu           sync.Mutex
+	OriginalName string
 }
 
 func NewTerminalPane(id int) *TerminalPane {
