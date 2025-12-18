@@ -7,22 +7,11 @@ import (
 	"path/filepath"
 	"runtime"
 
-	tea "github.com/charmbracelet/bubbletea"
-	"golang.org/x/sys/windows"
-
 	"github.com/MasFana/fana-envy/internal/config"
 	"github.com/MasFana/fana-envy/internal/tui"
 	"github.com/MasFana/fana-envy/internal/utils"
+	tea "github.com/charmbracelet/bubbletea"
 )
-
-func setupConsole() {
-	handle := windows.Handle(os.Stdout.Fd())
-	var mode uint32
-	if err := windows.GetConsoleMode(handle, &mode); err == nil {
-		mode |= windows.ENABLE_VIRTUAL_TERMINAL_PROCESSING
-		windows.SetConsoleMode(handle, mode)
-	}
-}
 
 func main() {
 	if len(os.Args) > 1 && os.Args[1] == "open" {
