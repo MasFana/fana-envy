@@ -6,7 +6,7 @@
 [![Go Version](https://img.shields.io/github/go-mod/go-version/MasFana/fana-envy?style=flat-square)](https://github.com/MasFana/fana-envy)
 [![License](https://img.shields.io/github/license/MasFana/fana-envy?style=flat-square)](LICENSE)
 
-Fana-Envy is a powerful, persistent terminal environment manager built with Go. It allows you to manage environment variables with a TUI, featuring interactive terminals, persistent history, and seamless environment switching.
+Fana-Envy is a powerful, persistent terminal environment manager built with Go. It allows you to manage environment variables with a TUI, featuring multi interactive terminals, persistent history, and seamless environment switching.
 
 ![fana-envy Demo](preview.gif)
 
