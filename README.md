@@ -14,10 +14,6 @@ Fana-Envy is a powerful, persistent terminal environment manager built with Go. 
 
 - **Environments**: Switch between sets of environment variables instantly.
 - **Multiple Terminals**: Manage multiple terminal instances in tabs/panes with dynamic naming (e.g., changes to `python` when running python).
-- **Interactive Experience**:
-  - Full support for interactive commands (e.g., Python `input()`, REPLs).
-  - **Unbuffered Output**: Automatically injects `PYTHONUNBUFFERED=1` so Python scripts output immediately.
-  - **Colored Output**: Forces color output (`FORCE_COLOR=1`, `CLICOLOR_FORCE=1`) for better visibility in the TUI.
 - **Persistent History**: Command history is saved relative to the application binary and deduplicated to avoid clutter.
 - **Environment Editor**: Built-in editor to modify environment variables on the fly (`.env` format).
 - **Cross-Platform**: Works on Windows, macOS, and Linux.
