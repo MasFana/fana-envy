@@ -25,6 +25,41 @@ Fana-Envy is a powerful, persistent terminal environment manager built with Go. 
 
 ## Installation
 
+### Download Precompiled Binary
+
+You can download the latest precompiled binaries from the [Releases Page](https://github.com/MasFana/fana-envy/releases/tag/v1.0.0).
+
+1. Download the archive matching your operating system and architecture.
+2. Extract the binary (`envy` or `envy.exe`) to a location of your choice.
+3. Add the location to your system `PATH` to run it from anywhere.
+
+#### Windows (PowerShell)
+
+To add the current folder to your `PATH` permanently:
+
+```powershell
+$targetPath = "C:\path\to\fana-envy"
+[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$targetPath", "User")
+```
+
+_Restart your terminal for changes to take effect._
+
+#### Linux / macOS
+
+Add the following to your `~/.bashrc`, `~/.zshrc`, or `~/.profile`:
+
+```bash
+export PATH=$PATH:/path/to/fana-envy
+```
+
+Then run `source ~/.bashrc` (or the relevant config file).
+
+### Build from Source
+
+Prerequisites:
+
+- [Go 1.21+](https://go.dev/dl/)
+
 ```bash
 git clone https://github.com/MasFana/fana-envy.git
 cd fana-envy
