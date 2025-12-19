@@ -8,7 +8,8 @@
 
 Fana-Envy is a powerful, persistent terminal environment manager built with Go. It allows you to manage environment variables with a TUI, featuring interactive terminals, persistent history, and seamless environment switching.
 
-![fana-envy UI](image.png)
+<video src="preview.webm" controls autoplay loop>
+</video>
 
 ## Features
 
